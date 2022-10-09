@@ -2,6 +2,8 @@ package br.com.fiap.accessiblemealapi.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +32,17 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> create(@Valid @RequestBody Cliente cliente) {
         service.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Cliente> show(@PathVariable Long id){
+        var optional = service.getById(id);
+
+        if(optional.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return ResponseEntity.of(service.getById(id));
     }
 
@@ -48,8 +54,10 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         
         var cliente = optional.get();
+        var senha = cliente.getSenha();
         BeanUtils.copyProperties(newCliente, cliente);
         cliente.setId(id);
+        cliente.setSenha(senha);
         service.save(cliente);
         return ResponseEntity.ok(cliente);
     }    

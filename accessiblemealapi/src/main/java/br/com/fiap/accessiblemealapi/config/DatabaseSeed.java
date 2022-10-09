@@ -31,6 +31,16 @@ public class DatabaseSeed implements CommandLineRunner {
                 "123",
                 "Av Cantareira, 1010"
             )
+        );    
+
+            clienteRepository.save( 
+            new Cliente(
+                "Amanda Silva",
+                "456.098.654-80", 
+                "admin@fiap.com.br",
+                "127",
+                "Av Cantareira, 1010"
+            )
         );
 
         restauranteRepository.saveAll(List.of(

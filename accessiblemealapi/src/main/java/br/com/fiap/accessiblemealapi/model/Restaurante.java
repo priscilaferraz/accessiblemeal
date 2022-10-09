@@ -4,17 +4,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Restaurante {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String nome;
+
+    @NotBlank(message = "Campo obrigatório")
     private String cnpj;
+
+    @NotBlank(message = "Campo obrigatório")
     private String email;
+
+    @NotBlank(message = "Campo obrigatório")
     private String telefone;
+
+    @NotBlank(message = "Campo obrigatório")
     private String endereco;
+
+    @NotBlank(message = "Campo obrigatório")
     private String acessibilidade;
     
     public Restaurante() {

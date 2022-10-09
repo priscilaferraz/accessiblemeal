@@ -4,16 +4,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Cliente {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String nome;
+
+    @NotBlank(message = "Campo obrigatório")
     private String cpf;
+
+    @NotBlank(message = "Campo obrigatório")
     private String email;
+
+    @NotBlank(message = "Campo obrigatório")
     private String senha;
+
+    @NotBlank(message = "Campo obrigatório")
     private String endereco;
     
     public Cliente() {
@@ -59,6 +72,7 @@ public class Cliente {
         this.email = email;
     }
 
+    @JsonProperty(access = Access.WRITE_ONLY)
     public String getSenha() {
         return senha;
     }

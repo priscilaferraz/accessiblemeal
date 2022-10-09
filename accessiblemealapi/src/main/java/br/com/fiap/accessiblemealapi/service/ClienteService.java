@@ -27,4 +27,7 @@ public class ClienteService {
         return repository.findById(id);
     }
     
+    public Optional<Cliente> findByEmailAndSenha(String email, String senha) {
+        return repository.findByEmailAndSenha(email, senha);
+    }
 }

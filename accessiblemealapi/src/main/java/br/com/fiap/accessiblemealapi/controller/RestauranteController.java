@@ -2,6 +2,8 @@ package br.com.fiap.accessiblemealapi.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -36,7 +38,7 @@ public class RestauranteController {
     }
 
     @PostMapping
-    public ResponseEntity<Restaurante> create(@RequestBody Restaurante restaurante) {
+    public ResponseEntity<Restaurante> create(@Valid @RequestBody Restaurante restaurante) {
         service.save(restaurante);
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurante);
     }
